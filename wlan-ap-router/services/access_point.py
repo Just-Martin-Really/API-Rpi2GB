@@ -28,7 +28,8 @@ def _ensure_profile_exists() -> None:
 
 
 def _apply_settings() -> None:
-    run(f'nmcli connection modify {AP_CONN_NAME} wifi-sec.psk "{WIFI_PASSWORD}"')
+    run(f'nmcli connection modify {AP_CONN_NAME} '
+        f'wifi-sec.key-mgmt wpa-psk wifi-sec.psk "{WIFI_PASSWORD}"')
     run(f"nmcli connection modify {AP_CONN_NAME} "
         f"ipv4.method manual ipv4.addresses {AP_IP}/24")
 
