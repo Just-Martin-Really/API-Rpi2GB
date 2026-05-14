@@ -15,5 +15,6 @@ def disable_wifi_powersave() -> None:
     with open(NM_CONF_PATH, "w") as f:
         f.write("[connection]\nwifi.powersave = 2\n")  # 2 = disabled
 
+    run("nmcli general reload conf", check=False)
     run(f"iw dev {WLAN_IFACE} set power_save off", check=False)
     print_ok("WiFi power-save disabled (persistent via NetworkManager)")
