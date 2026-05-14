@@ -25,12 +25,14 @@ wlan-ap-router/
 │   |── cleanup.py              # Step 2: remove conflicts
 |   └── __init__.py
 └── services/                   # One file per service / setup concern
-    ├── access_point.py         # Step 3: nmcli WPA2 AP
-    ├── dnsmasq.py              # Step 4: deploy + start dnsmasq
-    ├── forwarding.py           # Step 5: IPv4 kernel forwarding
-    ├── firewall.py             # Step 6: deploy + validate nftables
-    ├── enable.py               # Step 7: systemctl enable + systemd overrides
-    |── verify.py               # Step 8: PASS/FAIL health check
+    ├── regdomain.py            # Step 3a: lock WiFi regulatory domain (persistent)
+    ├── powersave.py            # Step 3b: disable WiFi power-save (persistent)
+    ├── access_point.py         # Step 3:  nmcli WPA2 AP
+    ├── dnsmasq.py              # Step 4:  deploy + start dnsmasq
+    ├── forwarding.py           # Step 5:  IPv4 kernel forwarding
+    ├── firewall.py             # Step 6:  deploy + validate nftables
+    ├── enable.py               # Step 7:  systemctl enable + systemd overrides
+    |── verify.py               # Step 8:  PASS/FAIL health check
     └── __init__.py
 ```
 
@@ -56,10 +58,13 @@ sudo python3 main.py
 | What you want to change | File to edit |
 |-------------------------|-------------|
 | SSID, password, AP IP   | `config/settings.py` |
+| WiFi country, band, channel | `config/settings.py` |
 | DHCP range, DNS domain  | `configs/dnsmasq.conf` |
 | Firewall rules          | `configs/nftables.conf` |
 | Kernel parameters       | `configs/sysctl_append.conf` |
 | Which packages to install | `core/installer.py` |
 | Which services autostart  | `services/enable.py` |
+
+For background on why `regdomain.py` and `powersave.py` exist, see [`regdomain-und-powersave.md`](../regdomain-und-powersave.md) at the repo root.
 
 
