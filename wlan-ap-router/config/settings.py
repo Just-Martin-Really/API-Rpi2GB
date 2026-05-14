@@ -11,6 +11,11 @@ AP_CONN_NAME  = "ap-wlan0"
 SSID          = "Production"
 WIFI_PASSWORD = "Production-01"   # Change before use, that is a very bad password
 AP_IP         = "192.168.50.1"
+AP_BAND       = "bg"              # 2.4 GHz; "a" = 5 GHz (not all RPi chips support AP on 5 GHz)
+AP_CHANNEL    = 6                 # 1, 6, 11 are the non-overlapping 2.4 GHz channels
+
+# WLAN regulatory domain (ISO-3166-1 alpha-2)
+WIFI_COUNTRY  = "DE"
 
 # DHCP 
 DHCP_START    = "192.168.50.20"

@@ -3,7 +3,9 @@
 #  so no separate hostapd.conf is required.
 
 from core.utils import run, print_ok, print_info
-from config.settings import WLAN_IFACE, AP_CONN_NAME, SSID, WIFI_PASSWORD, AP_IP
+from config.settings import (
+    WLAN_IFACE, AP_CONN_NAME, SSID, WIFI_PASSWORD, AP_IP, AP_BAND, AP_CHANNEL,
+)
 
 
 def configure_access_point() -> None:
@@ -32,6 +34,8 @@ def _apply_settings() -> None:
         f'wifi-sec.key-mgmt wpa-psk wifi-sec.psk "{WIFI_PASSWORD}"')
     run(f"nmcli connection modify {AP_CONN_NAME} "
         f"ipv4.method manual ipv4.addresses {AP_IP}/24")
+    run(f"nmcli connection modify {AP_CONN_NAME} "
+        f"802-11-wireless.band {AP_BAND} 802-11-wireless.channel {AP_CHANNEL}")
 
 
 def _activate() -> None:

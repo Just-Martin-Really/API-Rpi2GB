@@ -10,6 +10,8 @@ import sys
 
 from core     import install_packages, cleanup_conflicts
 from services import (
+    configure_regdomain,
+    disable_wifi_powersave,
     configure_access_point,
     configure_dnsmasq,
     enable_ip_forwarding,
@@ -30,6 +32,8 @@ def main() -> None:
 
     install_packages()
     cleanup_conflicts()
+    configure_regdomain()
+    disable_wifi_powersave()
     configure_access_point()
     configure_dnsmasq()
     enable_ip_forwarding()
